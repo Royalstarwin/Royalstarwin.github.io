@@ -282,6 +282,131 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/24/JavaScript-Tips/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="星了个星">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wonderland">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/24/JavaScript-Tips/" itemprop="url">JavaScript  Tips</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-24T16:57:21+08:00">
+                2017-10-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="JavaScript将数字金额转换为大写"><a href="#JavaScript将数字金额转换为大写" class="headerlink" title="JavaScript将数字金额转换为大写"></a>JavaScript将数字金额转换为大写</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div></pre></td><td class="code"><pre><div class="line">//获取元素内容</div><div class="line">       var moneys =$(&quot;.money&quot;).text();</div><div class="line"></div><div class="line">        function Arabia_To_SimplifiedChinese(Num) &#123;</div><div class="line">        for (i = Num.length - 1; i &gt;= 0; i--) &#123;</div><div class="line">            Num = Num.replace(&quot;,&quot;, &quot;&quot;)//替换Num中的“,”</div><div class="line">            Num = Num.replace(&quot; &quot;, &quot;&quot;)//替换Num中的空格</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        //验证输入的字符是否为数字</div><div class="line">        if (isNaN(Num)) &#123; </div><div class="line">            alert(&quot;请检查小写金额是否正确&quot;);</div><div class="line">            return;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        //字符处理完毕后开始转换，采用前后两部分分别转换(小数点为界限)</div><div class="line">        part = String(Num).split(&quot;.&quot;);</div><div class="line"></div><div class="line">        // 初始化一个字符串</div><div class="line">        newchar = &quot;&quot;;</div><div class="line"></div><div class="line">        //小数点前进行转化</div><div class="line">        for (i = part[0].length - 1; i &gt;= 0; i--) &#123;</div><div class="line"></div><div class="line">            //若数量超过拾亿单位，提示</div><div class="line">            if (part[0].length &gt; 10) &#123;</div><div class="line">                //alert(&quot;位数过大，无法计算&quot;);</div><div class="line">                return &quot;&quot;;</div><div class="line">            &#125;</div><div class="line"></div><div class="line"></div><div class="line">            tmpnewchar = &quot;&quot;</div><div class="line">            perchar = part[0].charAt(i);</div><div class="line"></div><div class="line">            switch (perchar) &#123;</div><div class="line">                case &quot;0&quot;:  tmpnewchar = &quot;零&quot; + tmpnewchar;break;</div><div class="line">                case &quot;1&quot;: tmpnewchar = &quot;一&quot; + tmpnewchar; break;</div><div class="line">                case &quot;2&quot;: tmpnewchar = &quot;二&quot; + tmpnewchar; break;</div><div class="line">                case &quot;3&quot;: tmpnewchar = &quot;三&quot; + tmpnewchar; break;</div><div class="line">                case &quot;4&quot;: tmpnewchar = &quot;四&quot; + tmpnewchar; break;</div><div class="line">                case &quot;5&quot;: tmpnewchar = &quot;五&quot; + tmpnewchar; break;</div><div class="line">                case &quot;6&quot;: tmpnewchar = &quot;六&quot; + tmpnewchar; break;</div><div class="line">                case &quot;7&quot;: tmpnewchar = &quot;七&quot; + tmpnewchar; break;</div><div class="line">                case &quot;8&quot;: tmpnewchar = &quot;八&quot; + tmpnewchar; break;</div><div class="line">                case &quot;9&quot;: tmpnewchar = &quot;九&quot; + tmpnewchar; break;</div><div class="line">            &#125;</div><div class="line">            switch (part[0].length - i - 1) &#123;</div><div class="line">                case 0: tmpnewchar = tmpnewchar; break;</div><div class="line">                case 1: if (perchar != 0) tmpnewchar = tmpnewchar + &quot;十&quot;; break;</div><div class="line">                case 2: if (perchar != 0) tmpnewchar = tmpnewchar + &quot;百&quot;; break;</div><div class="line">                case 3: if (perchar != 0) tmpnewchar = tmpnewchar + &quot;千&quot;; break;</div><div class="line">                case 4: tmpnewchar = tmpnewchar + &quot;万&quot;; break;</div><div class="line">                case 5: if (perchar != 0) tmpnewchar = tmpnewchar + &quot;十&quot;; break;</div><div class="line">                case 6: if (perchar != 0) tmpnewchar = tmpnewchar + &quot;百&quot;; break;</div><div class="line">                case 7: if (perchar != 0) tmpnewchar = tmpnewchar + &quot;千&quot;; break;</div><div class="line">                case 8: tmpnewchar = tmpnewchar + &quot;亿&quot;; break;</div><div class="line">                case 9: tmpnewchar = tmpnewchar + &quot;十&quot;; break;</div><div class="line">            &#125;</div><div class="line">            newchar = tmpnewchar + newchar;</div><div class="line">        &#125;   </div><div class="line">        //替换所有无用汉字，直到没有此类无用的数字为止</div><div class="line">        while (newchar.search(&quot;零零&quot;) != -1 || newchar.search(&quot;零亿&quot;) != -1 || newchar.search(&quot;亿万&quot;) != -1 || newchar.search(&quot;零万&quot;) != -1) &#123;</div><div class="line">            newchar = newchar.replace(&quot;零亿&quot;, &quot;亿&quot;);</div><div class="line">            newchar = newchar.replace(&quot;亿万&quot;, &quot;亿&quot;);</div><div class="line">            newchar = newchar.replace(&quot;零万&quot;, &quot;万&quot;);</div><div class="line">            newchar = newchar.replace(&quot;零零&quot;, &quot;零&quot;);      </div><div class="line">        &#125;</div><div class="line">        //替换以“一十”开头的，为“十”</div><div class="line">        if (newchar.indexOf(&quot;一十&quot;) == 0) &#123;</div><div class="line">            newchar = newchar.substr(1);</div><div class="line">        &#125;</div><div class="line">        //替换以“零”结尾的，为“”</div><div class="line">        if (newchar.lastIndexOf(&quot;零&quot;) == newchar.length - 1) &#123;</div><div class="line">            newchar = newchar.substr(0, newchar.length - 1);</div><div class="line">        &#125;</div><div class="line">        return newchar;</div><div class="line">    &#125;</div><div class="line">    //调用函数，传值</div><div class="line">    Arabia_To_SimplifiedChinese(moneys)</div><div class="line">    //将函数返回值给元素重新赋值</div><div class="line">    $(&quot;.money&quot;).text(newchar);</div></pre></td></tr></table></figure>
+<h1 id="JS弹幕实现"><a href="#JS弹幕实现" class="headerlink" title="JS弹幕实现"></a>JS弹幕实现</h1><h2 id="实现原理"><a href="#实现原理" class="headerlink" title="实现原理"></a>实现原理</h2><p>1、设置展示弹幕元素位置属性为relative<br>2、动态创建弹幕元素，位置属性设置absolute，left为展示宽度<br>3、随机设置弹幕元素top值<br>4、随机产生弹幕元素移动速率，修改left值</p>
+<h3 id="随机颜色"><a href="#随机颜色" class="headerlink" title="随机颜色"></a>随机颜色</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">第一种实现</div><div class="line">let color = &apos;#&apos; + Math.floor(Math.random() * 0xffffff).toString(16);</div><div class="line"></div><div class="line">第二种实现</div><div class="line">let color = &apos;#&apos; + Math.floor(Math.random() * 256).toString(10);</div><div class="line"></div><div class="line">第三种实现</div><div class="line">let r = Math.floor(Math.random()*256);</div><div class="line">let g = Math.floor(Math.random()*256);</div><div class="line">let b = Math.floor(Math.random()*256);</div><div class="line">let color = `rgb($&#123;r&#125;,$&#123;g&#125;,$&#123;b&#125;)`;</div></pre></td></tr></table></figure>
+<h3 id="随机速率"><a href="#随机速率" class="headerlink" title="随机速率"></a>随机速率</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">50 * +Math.random().toFixed(2)</div></pre></td></tr></table></figure>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div></pre></td><td class="code"><pre><div class="line">//html</div><div class="line">&lt;div class=&quot;container&quot;&gt;</div><div class="line">    &lt;div id=&quot;content&quot; class=&quot;content&quot;&gt;&lt;/div&gt;</div><div class="line">    &lt;div class=&quot;content-opt&quot;&gt;</div><div class="line">        &lt;div id=&quot;content-text&quot; class=&quot;content-text&quot;&gt;&lt;/div&gt;</div><div class="line">        &lt;div class=&quot;content-input&quot;&gt;</div><div class="line">            &lt;input id=&quot;text&quot; type=&quot;text&quot;&gt;</div><div class="line">            &lt;button id=&quot;send&quot;&gt;发送&lt;/button&gt;</div><div class="line">        &lt;/div&gt;</div><div class="line">    &lt;/div&gt;</div><div class="line">&lt;/div&gt;</div><div class="line"></div><div class="line">//css</div><div class="line">* &#123;</div><div class="line">    box-sizing: border-box;</div><div class="line">    outline: none;</div><div class="line">&#125;</div><div class="line"></div><div class="line">p &#123;</div><div class="line">    margin: .5em;</div><div class="line">    word-break: break-all;</div><div class="line">&#125;</div><div class="line"></div><div class="line">.container &#123;</div><div class="line">    position: relative;</div><div class="line">    width: 700px;</div><div class="line">    height: 500px;</div><div class="line">    margin: auto;</div><div class="line">    padding-right: 200px;</div><div class="line">&#125;</div><div class="line"></div><div class="line">.content &#123;</div><div class="line">    width: 100%;</div><div class="line">    height: 100%;</div><div class="line">    border: 1px solid #ccc;</div><div class="line">&#125;</div><div class="line"></div><div class="line">.content-opt &#123;</div><div class="line">    position: absolute;</div><div class="line">    top: 0;</div><div class="line">    right: 0;</div><div class="line">    width: 200px;</div><div class="line">    height: 100%;</div><div class="line">&#125;</div><div class="line"></div><div class="line">.content-text &#123;</div><div class="line">    height: calc(100% - 30px);</div><div class="line">    margin-bottom: 30px;</div><div class="line">    border: 1px solid #ccc;</div><div class="line">    overflow: auto;</div><div class="line">&#125;</div><div class="line"></div><div class="line">.content-input &#123;</div><div class="line">    position: absolute;</div><div class="line">    bottom: 0;</div><div class="line">    width: 100%;</div><div class="line">    height: 30px;</div><div class="line">    border: 1px solid #ccc;</div><div class="line">&#125;</div><div class="line"></div><div class="line">.content-input input &#123;</div><div class="line">    width: 70%;</div><div class="line">    padding: 2px;</div><div class="line">    border-radius: 5px;</div><div class="line">&#125;</div><div class="line"></div><div class="line">.content-input button &#123;</div><div class="line">    padding: 3px 10px;</div><div class="line">    border: none;</div><div class="line">    border-radius: 5px;</div><div class="line">    background: rgb(90, 154, 214);</div><div class="line">&#125;</div><div class="line"></div><div class="line">//js</div><div class="line">(function () &#123;</div><div class="line">    class Barrage &#123;</div><div class="line">        constructor(id) &#123;</div><div class="line">            this.domList = [];</div><div class="line">            this.dom = document.querySelector(&apos;#&apos; + id);</div><div class="line">            if (this.dom.style.position == &apos;&apos; || this.dom.style.position == &apos;static&apos;) &#123;</div><div class="line">                this.dom.style.position = &apos;relative&apos;;</div><div class="line">            &#125;</div><div class="line">            this.dom.style.overflow = &apos;hidden&apos;;</div><div class="line">            let rect = this.dom.getBoundingClientRect();</div><div class="line">            this.domWidth = rect.right - rect.left;</div><div class="line">            this.domHeight = rect.bottom - rect.top;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        shoot(text) &#123;</div><div class="line">            let div = document.createElement(&apos;div&apos;);</div><div class="line">            div.style.position = &apos;absolute&apos;;</div><div class="line">            div.style.left = this.domWidth + &apos;px&apos;;</div><div class="line">            div.style.top = (this.domHeight - 20) * +Math.random().toFixed(2) + &apos;px&apos;;</div><div class="line">            div.style.whiteSpace = &apos;nowrap&apos;;</div><div class="line">            div.style.color = &apos;#&apos; + Math.floor(Math.random() * 0xffffff).toString(16);</div><div class="line">            div.innerText = text;</div><div class="line">            this.dom.appendChild(div);</div><div class="line"></div><div class="line">            let roll = (timer) =&gt; &#123;</div><div class="line">                let now = +new Date();</div><div class="line">                roll.last = roll.last || now;</div><div class="line">                roll.timer = roll.timer || timer;</div><div class="line">                let left = div.offsetLeft;</div><div class="line">                let rect = div.getBoundingClientRect();</div><div class="line">                if (left &lt; (rect.left - rect.right)) &#123;</div><div class="line">                    this.dom.removeChild(div);</div><div class="line">                &#125; else &#123;</div><div class="line">                    if (now - roll.last &gt;= roll.timer) &#123;</div><div class="line">                        roll.last = now;</div><div class="line">                        left -= 3;</div><div class="line">                        div.style.left = left + &apos;px&apos;;</div><div class="line">                    &#125;</div><div class="line">                    requestAnimationFrame(roll);</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            roll(50 * +Math.random().toFixed(2));</div><div class="line">        &#125;</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    let barage = new Barrage(&apos;content&apos;);</div><div class="line"></div><div class="line">    function appendList(text) &#123;</div><div class="line">        let p = document.createElement(&apos;p&apos;);</div><div class="line">        p.innerText = text;</div><div class="line">        document.querySelector(&apos;#content-text&apos;).appendChild(p);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    document.querySelector(&apos;#send&apos;).onclick = () =&gt; &#123;</div><div class="line">        let text = document.querySelector(&apos;#text&apos;).value;</div><div class="line">        barage.shoot(text);</div><div class="line"></div><div class="line">        appendList(text);</div><div class="line">    &#125;;</div><div class="line"></div><div class="line">    const textList = [&apos;弹幕&apos;, &apos;666&apos;, &apos;233333333&apos;, &apos;javascript&apos;, &apos;html&apos;, &apos;css&apos;, &apos;前端框架&apos;, &apos;Vue&apos;, &apos;React&apos;, &apos;Angular&apos;,</div><div class="line">        &apos;测试弹幕效果&apos;</div><div class="line">    ];</div><div class="line">    textList.forEach((s) =&gt; &#123;</div><div class="line">        barage.shoot(s);</div><div class="line">        appendList(s);</div><div class="line">    &#125;)</div><div class="line">&#125;)()</div></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+    <div>
+      
+    </div>
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/17/hexo博客搭建心得/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -819,7 +944,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -832,7 +957,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
