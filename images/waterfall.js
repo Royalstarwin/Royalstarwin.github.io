@@ -1,4 +1,4 @@
-﻿window.onload = function() {
+window.onload = function() {
 	waterfall('main', 'pin');
 	addGlass();
 	var picNum = 0;
