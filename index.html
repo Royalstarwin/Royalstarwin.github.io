@@ -79,13 +79,16 @@
 
 
 
+<meta name="description" content="菜鸟驿站">
 <meta property="og:type" content="website">
-<meta property="og:title" content="钉钉安装及部署方法">
+<meta property="og:title" content="Wonderland">
 <meta property="og:url" content="http://yoursite.com/index.html">
-<meta property="og:site_name" content="钉钉安装及部署方法">
+<meta property="og:site_name" content="Wonderland">
+<meta property="og:description" content="菜鸟驿站">
 <meta property="og:locale" content="zh-Hans">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="钉钉安装及部署方法">
+<meta name="twitter:title" content="Wonderland">
+<meta name="twitter:description" content="菜鸟驿站">
 
 
 
@@ -121,7 +124,7 @@
 
 
 
-  <title>钉钉安装及部署方法</title>
+  <title>Wonderland</title>
   
 
 
@@ -162,12 +165,12 @@
     <div class="custom-logo-site-title">
       <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">钉钉安装及部署方法</span>
+        <span class="site-title">Wonderland</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
       
-        <p class="site-subtitle"></p>
+        <p class="site-subtitle">合抱之木，生于毫末。</p>
       
   </div>
 
@@ -282,13 +285,13 @@
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/19/钉钉安装和部署方法/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
+      <meta itemprop="name" content="星了个星">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="钉钉安装及部署方法">
+      <meta itemprop="name" content="Wonderland">
     </span>
 
     
@@ -350,7 +353,8 @@
       
         
           
-            <h2 id="安装nvm"><a href="#安装nvm" class="headerlink" title="安装nvm"></a>安装<a href="https://github.com/creationix/nvm" target="_blank" rel="external">nvm</a></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.5/install.sh | bash</div></pre></td></tr></table></figure>
+            <p><strong><em>注：如中心版审批流程有变动，需同步发一份需求给钉钉负责人，我们这边好做同步修改</em></strong></p>
+<h2 id="安装nvm"><a href="#安装nvm" class="headerlink" title="安装nvm"></a>安装<a href="https://github.com/creationix/nvm" target="_blank" rel="external">nvm</a></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.5/install.sh | bash</div></pre></td></tr></table></figure>
 <p>执行完毕后，关闭当前终端，打开一个新终端，键入</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">nvm --version</div><div class="line">0.33.5</div></pre></td></tr></table></figure>
 <p>证明nvm已成功安装</p>
@@ -373,7 +377,6 @@
 <p>注：apps数组中可添加多个服务实例</p>
 </blockquote>
 <h3 id="PM2使用"><a href="#PM2使用" class="headerlink" title="PM2使用"></a>PM2使用</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line"># 启动所有服务</div><div class="line">pm2 start pm2.config.js</div><div class="line">pm2 save # 用于服务器重启后执行`pm2 startup`</div><div class="line"></div><div class="line"># 启动某个服务 (例:启动 BiaoZhun)</div><div class="line">pm2 start pm2.config.js --only BiaoZhun</div><div class="line"></div><div class="line"># 重启所有服务 (任一)</div><div class="line">pm2 start pm2.config.js</div><div class="line">pm2 restart pm2.config.js</div><div class="line">pm2 restart all</div><div class="line"></div><div class="line"># 删除所有服务 (任一)</div><div class="line">pm2 delete pm2.config.js</div><div class="line">pm2 delete all</div><div class="line"></div><div class="line"># 查看所有日志</div><div class="line">pm2 logs</div><div class="line"></div><div class="line"># 查看某个服务日志 (例: BiaoZhun)</div><div class="line">pm2 logs BiaoZhun</div><div class="line"></div><div class="line"># 清除pm2管理服务的所有日志</div><div class="line">pm2 flush</div><div class="line"></div><div class="line"># 升级pm2</div><div class="line">pm2 save</div><div class="line">npm install pm2 -g</div><div class="line">pm2 update</div><div class="line"></div><div class="line"># 设置开机启动 (需提前执行`pm2 save`，使pm2保存有程序实例)</div><div class="line">pm2 startup</div><div class="line"></div><div class="line"># 若更新了node版本，请重启pm2</div><div class="line">pm2 unstartup</div><div class="line">pm2 startup</div><div class="line"></div><div class="line"># 查看CPU/Memory占用</div><div class="line">pm2 monit</div><div class="line"></div><div class="line"># 集群管理 (例: BiaoZhun)</div><div class="line">pm2 scale BiaoZhun 2  # 将线程设置为2</div><div class="line">pm2 scale BiaoZhun +2 # 增加2个线程</div></pre></td></tr></table></figure>
-<p><strong>注：如中心版审批流程有变动，需同步发一份需求给钉钉负责人，我们这边好做同步修改</strong></p>
 
           
         
@@ -427,13 +430,13 @@
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/24/JavaScript-Tips/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
+      <meta itemprop="name" content="星了个星">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="钉钉安装及部署方法">
+      <meta itemprop="name" content="Wonderland">
     </span>
 
     
@@ -552,13 +555,13 @@
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/17/hexo博客搭建心得/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
+      <meta itemprop="name" content="星了个星">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="钉钉安装及部署方法">
+      <meta itemprop="name" content="Wonderland">
     </span>
 
     
@@ -922,13 +925,13 @@
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/17/hello-world/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
+      <meta itemprop="name" content="星了个星">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="钉钉安装及部署方法">
+      <meta itemprop="name" content="Wonderland">
     </span>
 
     
@@ -1073,10 +1076,10 @@
             
               <img class="site-author-image" itemprop="image"
                 src="/images/avatar.png"
-                alt="" />
+                alt="星了个星" />
             
-              <p class="site-author-name" itemprop="name"></p>
-              <p class="site-description motion-element" itemprop="description"></p>
+              <p class="site-author-name" itemprop="name">星了个星</p>
+              <p class="site-description motion-element" itemprop="description">菜鸟驿站</p>
           </div>
 
           <nav class="site-state motion-element">
@@ -1143,7 +1146,7 @@
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder"></span>
+  <span class="author" itemprop="copyrightHolder">星了个星</span>
 
   
 </div>
