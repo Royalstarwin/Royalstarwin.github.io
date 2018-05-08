@@ -282,6 +282,151 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/08/钉钉安装及部署方法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="星了个星">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wonderland">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/08/钉钉安装及部署方法/" itemprop="url">钉钉安装及部署方法</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-08T13:25:17+08:00">
+                2018-05-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>​         <strong>注：如中心版审批流程有变动，需同步发一份需求给钉钉负责人，我们这边好做同步修改</strong></p>
+<h2 id="安装nvm"><a href="#安装nvm" class="headerlink" title="安装nvm"></a>安装<a href="https://github.com/creationix/nvm" target="_blank" rel="external">nvm</a></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.5/install.sh | bash</div></pre></td></tr></table></figure>
+<p>执行完毕后，关闭当前终端，打开一个新终端，键入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">nvm --version</div><div class="line">0.33.5</div></pre></td></tr></table></figure>
+<p>证明nvm已成功安装</p>
+<h2 id="安装node"><a href="#安装node" class="headerlink" title="安装node"></a>安装<a href="https://nodejs.org/en/" target="_blank" rel="external">node</a></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">nvm install v8.9.0</div><div class="line">node -v</div><div class="line">v8.9.0</div></pre></td></tr></table></figure>
+<h2 id="安装pm2"><a href="#安装pm2" class="headerlink" title="安装pm2"></a>安装<a href="http://pm2.keymetrics.io/" target="_blank" rel="external">pm2</a></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">npm install pm2 -g</div><div class="line">pm2 -v</div><div class="line">2.7.1</div></pre></td></tr></table></figure>
+<h2 id="配置项"><a href="#配置项" class="headerlink" title="配置项"></a>配置项</h2><h3 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">bin/www</div><div class="line"></div><div class="line">var port = normalizePort(process.env.PORT || &apos;3000&apos;);</div><div class="line">// 修改`3000`为任意端口，此端口需映射外网，并将外网地址填入钉钉官网微应用配置：首页地址</div></pre></td></tr></table></figure>
+<h3 id="接口地址"><a href="#接口地址" class="headerlink" title="接口地址"></a>接口地址</h3><blockquote>
+<p>注意地址后的反斜杠</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">routes/env.js</div><div class="line"></div><div class="line">module.exports = &#123;</div><div class="line">  ddUrl:   &apos;http://192.168.5.104:8082/&apos;,  //钉钉后台地址(ddService)</div><div class="line">  workUrl: &apos;http://192.168.5.104:8082/&apos;,  //反显和审批接口地址</div><div class="line">  bbUrl:   &apos;http://192.168.5.104:8080/&apos;,  //报表地址</div><div class="line">  zjbzxbm: &apos;C41170&apos;,</div><div class="line">  zxbm:    &apos;01&apos;,</div><div class="line">  blqd:    &apos;app_01&apos;,</div><div class="line">  // 测试用钉钉配置</div><div class="line">  ddConfig: &#123;</div><div class="line">    corpId:     &apos;不需配置&apos;,</div><div class="line">    corpsecret: &apos;不需配置&apos;,</div><div class="line">    agentId:    &apos;不需配置&apos;,</div><div class="line">    appUrl:     &apos;不需配置&apos;,</div><div class="line">    nonceStr:   &apos;不需配置&apos;</div><div class="line">  &#125;,</div><div class="line">  // xmpp推送配置</div><div class="line">  xmppConfig: &#123;</div><div class="line">    jid:      &apos;app_01@192.168.5.105/GuomioBiaoZhun&apos;,</div><div class="line">    password: &apos;1234&apos;,</div><div class="line">    to:       &apos;zxb@192.168.5.105&apos;</div><div class="line">  &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h3 id="ddService配置"><a href="#ddService配置" class="headerlink" title="ddService配置"></a>ddService配置</h3><h4 id="钉钉1-0："><a href="#钉钉1-0：" class="headerlink" title="钉钉1.0："></a><strong><em>钉钉1.0：</em></strong></h4><blockquote>
+<p>此配置为阿里钉钉微应用参数<br>地址：<a href="https://www.dingtalk.com/" target="_blank" rel="external">https://www.dingtalk.com/</a><br>注：可参考<a href="https://guomio.github.io/2017/11/07/%E9%92%89%E9%92%89%E6%B3%A8%E5%86%8C%E5%85%AC%E5%8F%B8%E5%8F%8A%E8%8E%B7%E5%8F%96%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/#more" target="_blank" rel="external">另一篇文档</a></p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">application.properties</div><div class="line"></div><div class="line">#钉钉</div><div class="line">dd.url=https://oapi.dingtalk.com</div><div class="line">dd.corpid=ding425fb762caXXXXXXX5c2f4657eb6378f</div><div class="line">dd.corpsecret=1x7hG8tQopdsmtH2h8GGp4IbXXXXXXXXoCxsSC9Dyqy8FnyIqFraj-x1lhyPezTr</div><div class="line">dd.appjsurl=http://12329.pub:XXXXX/</div><div class="line">dd.agentId=12XXXX573</div><div class="line">dd.appId=dingoaocr4nXXXXjfaqtrp</div><div class="line">dd.appSecret=BPIzx4WmKBkGl1xK5wxBEmfVUoZXXXXXXXXTm6_swPJpefhZYUQeUgwNF5TAUYs9</div></pre></td></tr></table></figure>
+<h4 id="钉钉2-0："><a href="#钉钉2-0：" class="headerlink" title="钉钉2.0："></a><strong><em>钉钉2.0：</em></strong></h4><p>配置 MySQL 数据库：表EXT_DD</p>
+<p><img src="http://p4ji2k7sg.bkt.clouddn.com/dd.png" alt="http://p4ji2k7sg.bkt.clouddn.com/dd.png"></p>
+<h2 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h2><p>在项目下新建pm2.config.js文件 (必须以<code>.config.js</code>结尾)，内容为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">module.exports = &#123;</div><div class="line">  apps: [&#123;</div><div class="line">    name        : &apos;BiaoZhun&apos;,     //启动项目名称</div><div class="line">    script      : &apos;bin/www&apos;,      //启动文件路径</div><div class="line">    error_file  : &apos;logs/err.log&apos;, //错误日志路径</div><div class="line">    out_file    : &apos;logs/out.log&apos;, //日志路径</div><div class="line">    merge_logs  : true,</div><div class="line">    watch       : [&apos;routes&apos;],     //监听文件改动自动重启，true:全部监听</div><div class="line">    ignore_watch: [&apos;public&apos;],</div><div class="line">    max_memory_restart: &apos;500M&apos;,   //内存超限自动重启，单位&apos;G&apos;，&apos;M&apos;，&apos;k&apos;</div><div class="line">    instances   : 1,              //集群模式CPU内核数，&apos;max&apos;:自动均衡</div><div class="line">    exec_mode   : &apos;cluster&apos;,      //&apos;cluster&apos;:均衡负载，&apos;fork&apos;:正常模式</div><div class="line">    env: &#123;</div><div class="line">      NODE_ENV: &apos;production&apos;</div><div class="line">    &#125;,</div><div class="line">    watch_options: &#123;</div><div class="line">      followSymlinks: false,</div><div class="line">      usePolling: true</div><div class="line">    &#125;</div><div class="line">  &#125;]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>注：apps数组中可添加多个服务实例</p>
+</blockquote>
+<h3 id="PM2使用"><a href="#PM2使用" class="headerlink" title="PM2使用"></a>PM2使用</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line"># 启动所有服务</div><div class="line">pm2 start pm2.config.js</div><div class="line">pm2 save # 用于服务器重启后执行`pm2 startup`</div><div class="line"></div><div class="line"># 启动某个服务 (例:启动 BiaoZhun)</div><div class="line">pm2 start pm2.config.js --only BiaoZhun</div><div class="line"></div><div class="line"># 重启所有服务 (任一)</div><div class="line">pm2 start pm2.config.js</div><div class="line">pm2 restart pm2.config.js</div><div class="line">pm2 restart all</div><div class="line"></div><div class="line"># 删除所有服务 (任一)</div><div class="line">pm2 delete pm2.config.js</div><div class="line">pm2 delete all</div><div class="line"></div><div class="line"># 查看所有日志</div><div class="line">pm2 logs</div><div class="line"></div><div class="line"># 查看某个服务日志 (例: BiaoZhun)</div><div class="line">pm2 logs BiaoZhun</div><div class="line"></div><div class="line"># 清除pm2管理服务的所有日志</div><div class="line">pm2 flush</div><div class="line"></div><div class="line"># 升级pm2</div><div class="line">pm2 save</div><div class="line">npm install pm2 -g</div><div class="line">pm2 update</div><div class="line"></div><div class="line"># 设置开机启动 (需提前执行`pm2 save`，使pm2保存有程序实例)</div><div class="line">pm2 startup</div><div class="line"></div><div class="line"># 若更新了node版本，请重启pm2</div><div class="line">pm2 unstartup</div><div class="line">pm2 startup</div><div class="line"></div><div class="line"># 查看CPU/Memory占用</div><div class="line">pm2 monit</div><div class="line"></div><div class="line"># 集群管理 (例: BiaoZhun)</div><div class="line">pm2 scale BiaoZhun 2  # 将线程设置为2</div><div class="line">pm2 scale BiaoZhun +2 # 增加2个线程</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+    <div>
+      
+    </div>
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/08/2018年工作记录/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1539,7 +1684,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1552,7 +1697,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
