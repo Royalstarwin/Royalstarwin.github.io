@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="钉钉,方案," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="1.整体方案​    钉钉开发选择使用当下流行的React+nodejs的开发模式；使用ReactRedux作为数据层管理，完善组件间通信；使用webpack作为模块打包工具，精简静态资源；使用中心板的各个接口作为数据源，实现手机钉钉和中心板的交互；根据阿里的官方文档，发布上线到钉钉微应用中。  ​    与传统的jQuery+Ajax开发方式不同，以React作为前端框架，Nodejs作为中转后">
+<meta name="keywords" content="钉钉,方案">
+<meta property="og:type" content="article">
+<meta property="og:title" content="钉钉技术方案">
+<meta property="og:url" content="http://yoursite.com/2018/05/09/钉钉技术方案/index.html">
+<meta property="og:site_name" content="Wonderland">
+<meta property="og:description" content="1.整体方案​    钉钉开发选择使用当下流行的React+nodejs的开发模式；使用ReactRedux作为数据层管理，完善组件间通信；使用webpack作为模块打包工具，精简静态资源；使用中心板的各个接口作为数据源，实现手机钉钉和中心板的交互；根据阿里的官方文档，发布上线到钉钉微应用中。  ​    与传统的jQuery+Ajax开发方式不同，以React作为前端框架，Nodejs作为中转后">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://p4ji2k7sg.bkt.clouddn.com/menu.saveimg.savepath20180509161440.jpg">
+<meta property="og:image" content="http://p4ji2k7sg.bkt.clouddn.com/532.jpg">
+<meta property="og:updated_time" content="2018-05-09T08:44:45.183Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="钉钉技术方案">
+<meta name="twitter:description" content="1.整体方案​    钉钉开发选择使用当下流行的React+nodejs的开发模式；使用ReactRedux作为数据层管理，完善组件间通信；使用webpack作为模块打包工具，精简静态资源；使用中心板的各个接口作为数据源，实现手机钉钉和中心板的交互；根据阿里的官方文档，发布上线到钉钉微应用中。  ​    与传统的jQuery+Ajax开发方式不同，以React作为前端框架，Nodejs作为中转后">
+<meta name="twitter:image" content="http://p4ji2k7sg.bkt.clouddn.com/menu.saveimg.savepath20180509161440.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/05/09/钉钉技术方案/"/>
+
+
+
+
+
+  <title>钉钉技术方案 | Wonderland</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?40cf840208b84a3690542f531071a51a";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+<a href="https://github.com/Royalstarwin"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/a6677b08c955af8400f44c6298f40e7d19cc5b2d/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677261795f3664366436642e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png"></a>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Wonderland</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">合抱之木，生于毫末。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />
+            
+            日程表
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/09/钉钉技术方案/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="星了个星">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wonderland">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">钉钉技术方案</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-09T16:12:31+08:00">
+                2018-05-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="1-整体方案"><a href="#1-整体方案" class="headerlink" title="1.整体方案"></a>1.整体方案</h2><p>​    钉钉开发选择使用当下流行的React+nodejs的开发模式；使用ReactRedux作为数据层管理，完善组件间通信；使用webpack作为模块打包工具，精简静态资源；使用中心板的各个接口作为数据源，实现手机钉钉和中心板的交互；根据阿里的官方文档，发布上线到钉钉微应用中。</p>
+<p><img src="http://p4ji2k7sg.bkt.clouddn.com/menu.saveimg.savepath20180509161440.jpg" alt="http://p4ji2k7sg.bkt.clouddn.com/menu.saveimg.savepath20180509161440.jpg"></p>
+<p>​    与传统的jQuery+Ajax开发方式不同，以React作为前端框架，Nodejs作为中转后台，是以前端发请求给后端，后端写路由的方式进行前后端分离开发的。</p>
+<p>​    React+nodejs的优势：React构建的是一个路由控制的单页面应用，入口文件只有一个index.html，避免了页面跳转所带来的问题；使用react可以减少dom操作，通过操作虚拟dom（Virtual DOM）来更新视图，避免页面的reflow，repaint带来的性能问题；前端代码组件化，方便重用，用jsx语法糖将js，html甚至css写在一起形成组件；nodejs作为中转后台，使前后端分离，前端执行页面逻辑、视图，nodejs作为后端请求数据；nodejs为钉钉程序过滤掉无效数据，将有效数据传递给前台，优化http请求。</p>
+<h3 id="2-前端代码"><a href="#2-前端代码" class="headerlink" title="2.前端代码"></a>2.前端代码</h3><h4 id="2-1-前端框架选择"><a href="#2-1-前端框架选择" class="headerlink" title="2.1 前端框架选择"></a>2.1 前端框架选择</h4><p>​    选择当下最流行的三大框架之一，由facebook开源的React。与传统web应用的不同，React为了尽可能减少对DOM的操作，使用操作虚拟dom（用来描述dom的javascript对象）的方式，在通过diff算法转化成真实dom，提升页面性能。使用jsx语法糖的写法，也就是js内定义的一套XML语法，可以解<br>析出目标js代码,颠覆传统js写法。更加语义化，允许自定义标签及组件。更加直观，标签处理方式，更加可读。关注分离,模块化，性能优秀。</p>
+<h4 id="2-2-前端路由React-Router"><a href="#2-2-前端路由React-Router" class="headerlink" title="2.2 前端路由React-Router"></a>2.2 前端路由React-Router</h4><pre><code>使用React-Router构建了前端的单页面应用，分离前后端，前端负责界面显示，后端负责数据存储和计算，各司其职；减轻服务器压力，服务器只用出数据就可以，不用管展示逻辑和页面合成，提升用户体验；同时还实现了与多页面应用类似的功能：
+</code></pre><p>​    1）在地址栏显示的URL总能够反映出视图展示的东西。<br>​    2）能够成功地使用浏览器的返回和前进按钮。<br>​    3）能够直接的使用相关联的URL导航到某个特别的视图。</p>
+<p>​    使用history第三方库，管理js运行时的会话历史记录。history抽象出各种环境中的差异，管理历史堆栈，导航，确认导航以及在会话之间保持状态。</p>
+<h4 id="2-3-React-Redux管理数据层"><a href="#2-3-React-Redux管理数据层" class="headerlink" title="2.3 React-Redux管理数据层"></a>2.3 React-Redux管理数据层</h4><blockquote>
+<p>Redux是针对JavaScript应用的可预测状态容器</p>
+</blockquote>
+<p>​    因为react的state是所有组件共享的状态，state的改变也会影响到所有用到相关state的组件导致页面刷新；多个react组件间通信困难。</p>
+<p><img src="http://p4ji2k7sg.bkt.clouddn.com/532.jpg" alt="http://p4ji2k7sg.bkt.clouddn.com/532.jpg"></p>
+<p>​    所以使用React-Redux来解决这些问题。它将所有组件需要用到的state，放在唯一的一个store中，每个组件都可以订阅（subscribe）某个或者某些state，当这些state发生变化时store会通知所有订阅相关state的组件重新渲染。而改变state的方法从杂乱无章的setState()，变成了事件（action）派发（dispatch）的方式。当某些方法创建action后，将他传入store，store将oldState和action交给相关的reducer处理，处理后用newState将其替换。提高了程序的稳定性的同时，也提高了代码的可读性，将智能组件和UI组件分工明确，智能组件处理逻辑，UI组件负责内容呈现。</p>
+<h4 id="2-4-数据请求与异步处理方案"><a href="#2-4-数据请求与异步处理方案" class="headerlink" title="2.4 数据请求与异步处理方案"></a>2.4 数据请求与异步处理方案</h4><p>​    使用成熟的基于promise的http库—Axios，来处理ajax数据请求；异步处理方案选择号称“异步编程终级解决方案”的 async/await，解决了传统方案中回调嵌套回调的回调地狱问题，提高性能，代码可读性更高；解决了Promise的then()链中多个请求结果互相依赖传递参数困难的问题，更好的语义性。</p>
+<h4 id="2-5-前端代码的构建与打包"><a href="#2-5-前端代码的构建与打包" class="headerlink" title="2.5 前端代码的构建与打包"></a>2.5 前端代码的构建与打包</h4><p>​    使用官方推荐的脚手架工具create-react-app，构建前端基础构架。使用webpack作为前端打包工具，将代码分割，使用babel和cssloader等编译ES6,ES7写法和css提高兼容性，最后静态文件精简，减小服务端加载静态资源的压力。</p>
+<h3 id="3-后端代码"><a href="#3-后端代码" class="headerlink" title="3.后端代码"></a>3.后端代码</h3><h4 id="3-1-为什么nodejs做中转后台？"><a href="#3-1-为什么nodejs做中转后台？" class="headerlink" title="3.1 为什么nodejs做中转后台？"></a>3.1 为什么nodejs做中转后台？</h4><p>1）React是高性能的前端框架，不擅长数据请求和处理数据，所以交给nodejs来做。<br>2）路由设计，控制逻辑，数据请求和处理交给node后端，UI呈现交给React。<br>3）nodejs擅长处理I/O，善于处理数据相互调用的情况。（用A接口的数据调用B接口，继续向下调用）<br>4）修复接口数据，请求后端数据不尽理想，node中转后台整理数据结构，过滤无效数据为前端提供更搞笑的数据。</p>
+<h4 id="3-2-后端框架Koa2"><a href="#3-2-后端框架Koa2" class="headerlink" title="3.2 后端框架Koa2"></a>3.2 后端框架Koa2</h4><p> 使用Express原班人马打造，更小巧的Koa2。相比与“稳健”的Express，Koa2完美支持了ES6，ES7的新特性，自动转码，减少了配置文件和对编译工具的依赖。<br> koa-route 采用的是restful设计模式，路由的模块化 路由规则是域名+模块+方法，例如：<a href="http://localhost:3000/approval/todo" target="_blank" rel="external">http://localhost:3000/approval/todo</a> 它的优势在于结构清晰、符合标准、易于理解、扩展方便。<br> middleware中间件，koa2对网络请求采用了中间件的形式处理,中间件可以介入请求和相应的处理,是一个轻量级的模块,每个中间件负责完成某个特定的功能。通过next函数联系，更加方便的处理请求。</p>
+<h4 id="3-3-Socket-io实现消息推送"><a href="#3-3-Socket-io实现消息推送" class="headerlink" title="3.3 Socket.io实现消息推送"></a>3.3 Socket.io实现消息推送</h4><p> Socket.io封装了html5中的WebSocket新特性和轮询等方法，socket通讯可以近似的认为是一个长连接。不同的xhr或者http请求是一次性的，请求完成之后通道关闭，而Socket.io可以将通道保存，通道的两端可以相互喊话，大量使用在通讯功能之中。</p>
+<h4 id="3-4-pm2管理node程序进程"><a href="#3-4-pm2管理node程序进程" class="headerlink" title="3.4 pm2管理node程序进程"></a>3.4 pm2管理node程序进程</h4><p> pm2是node.js生产过程管理器，它保证app一直运行，任何一个线程挂掉将自动重启；监测所有已启动的流程，方便程序管理，提高node性能，简化集群操作，实施拓展集群。</p>
+<h3 id="4-总结"><a href="#4-总结" class="headerlink" title="4.总结"></a>4.总结</h3><p> 钉钉是以React为前端框架，nodejs为中转后台，数据源依赖中心板的app。设计模式是前后端分离的，前端组件是模块化、复用性强的；js语法使用ES6/ES7+babel编译的形式，让js代码更精简；前端自动化打包工具使用webpack，高效的压缩静态资源；最后前端文件和后端文件整合，pm2管理发布上线。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">
+            -------------Ending
+            <i class="fa fa-paw"></i>
+            Thank you for your time-------------
+        </div>
+    
+</div>
+      
+    </div>
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/钉钉/" rel="tag"><i class="fa fa-tag"></i> 钉钉</a>
+          
+            <a href="/tags/方案/" rel="tag"><i class="fa fa-tag"></i> 方案</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/08/钉钉安装及部署方法/" rel="next" title="钉钉安装及部署方法">
+                <i class="fa fa-chevron-left"></i> 钉钉安装及部署方法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="星了个星" />
+            
+              <p class="site-author-name" itemprop="name">星了个星</p>
+              <p class="site-description motion-element" itemprop="description">菜鸟驿站</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-整体方案"><span class="nav-number">1.</span> <span class="nav-text">1.整体方案</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-前端代码"><span class="nav-number">1.1.</span> <span class="nav-text">2.前端代码</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-前端框架选择"><span class="nav-number">1.1.1.</span> <span class="nav-text">2.1 前端框架选择</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-前端路由React-Router"><span class="nav-number">1.1.2.</span> <span class="nav-text">2.2 前端路由React-Router</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-React-Redux管理数据层"><span class="nav-number">1.1.3.</span> <span class="nav-text">2.3 React-Redux管理数据层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-4-数据请求与异步处理方案"><span class="nav-number">1.1.4.</span> <span class="nav-text">2.4 数据请求与异步处理方案</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-5-前端代码的构建与打包"><span class="nav-number">1.1.5.</span> <span class="nav-text">2.5 前端代码的构建与打包</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-后端代码"><span class="nav-number">1.2.</span> <span class="nav-text">3.后端代码</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-为什么nodejs做中转后台？"><span class="nav-number">1.2.1.</span> <span class="nav-text">3.1 为什么nodejs做中转后台？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-后端框架Koa2"><span class="nav-number">1.2.2.</span> <span class="nav-text">3.2 后端框架Koa2</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-Socket-io实现消息推送"><span class="nav-number">1.2.3.</span> <span class="nav-text">3.3 Socket.io实现消息推送</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-4-pm2管理node程序进程"><span class="nav-number">1.2.4.</span> <span class="nav-text">3.4 pm2管理node程序进程</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-总结"><span class="nav-number">1.3.</span> <span class="nav-text">4.总结</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">星了个星</span>
+
+  
+</div>
+
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+  <!-- 页面点击小红心 -->
+  <script type="text/javascript" src="/js/src/love.js"></script>
+</body>
+</html>
